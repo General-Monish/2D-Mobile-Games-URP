@@ -9,7 +9,7 @@ public class ScalingSpike : MonoBehaviour
     bool isWaiting = false;
     float timer = 0;
     [SerializeField] float maxScale;
-    [SerializeField] float scalingFactor;
+    [SerializeField] float scalingFactor; //  Direction of scale change (positive = grow, negative = shrink).
     [SerializeField] float scalingSpeed;
     private float currentScale;
     // Start is called before the first frame update
