@@ -11,10 +11,17 @@ public class Player : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
+
+    SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        soundManager = FindObjectOfType<SoundManager>();
+        if(soundManager == null)
+        {
+            Debug.LogError("Sound Manager Is Missing in Scene");
+        }
     }
 
     // Update is called once per frame
@@ -61,13 +68,14 @@ public class Player : MonoBehaviour
 
     void PlayerDie()
     {
+        soundManager.GameOverAudio();
         levelManager.OnPlayerDeath();
         Destroy(gameObject);
     }
 
     void LevelComplete()
     {
-        Debug.Log("Level Finished");
+        soundManager.LevelCompleteAudio();
         levelManager.OnLevelComplete();
     }
 }

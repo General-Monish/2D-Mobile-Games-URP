@@ -11,13 +11,19 @@ public class LevelUI : MonoBehaviour
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI gameOverText;
     public int levelNumber=1;
-    levelManager levelManager;
+    [SerializeField] levelManager levelManager;
     [SerializeField] Button restartBtn;
     [SerializeField] Button menuBtn;
+    SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
         UpdateLevelNumber();
+        soundManager = FindObjectOfType<SoundManager>();
+        if(soundManager == null)
+        {
+            Debug.LogError("SM Missing ");
+        }
     }
 
     // Update is called once per frame
@@ -49,11 +55,15 @@ public class LevelUI : MonoBehaviour
 
     public void RestartBtn()
     {
+        soundManager.ButtonClickAudio();
+        soundManager.DestroySoundManager();
         levelManager.RestartLevel();
     }
 
     public void MenuBtn()
     {
+        soundManager.ButtonClickAudio();
+        soundManager.DestroySoundManager();
         levelManager.LoadMMBtn();
     }
 
